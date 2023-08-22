@@ -11,7 +11,7 @@ const routerAdmin = require('./route/admin');
 const ejs_locals_engine = require('ejs-locals');
 const fileUpload = require('express-fileupload');
 const cookieParser = require('cookie-parser');
-const {apiResponse} = require('./core/ApiResponse');
+const {apiResponse} = require('./core/apiResponse');
 
 const app = express();
 const server = require('http').createServer(app);

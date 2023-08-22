@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const {validationResult} = require('express-validator');
 const UserModel = require('../models/UserModel');
 const {generateTokens} = require('../services/tokenService');
-const UserDto = require('../dtos/userDto');
+const UserDto = require('../dtos/UserDto');
 
 exports.connect = async function(req, res){
     res.json(res.response);

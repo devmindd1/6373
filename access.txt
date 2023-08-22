@@ -1,0 +1,1 @@
+git remote  set-url origin https://devmindd1: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@github.com/devmindd1/6373.git

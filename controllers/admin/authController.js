@@ -1,6 +1,6 @@
 const tokenMaxAge = 60000*60*24*15;
 const {validationResult} = require('express-validator');
-const UserModel = require('../../models/userModel.js');
+const UserModel = require('../../models/UserModel.js');
 const {string2sha1, randomString} = require('../../helpers/stringHelper.js');
 
 exports.index = function(req, res){

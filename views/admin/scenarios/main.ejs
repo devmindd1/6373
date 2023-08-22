@@ -1,0 +1,44 @@
+<% layout("../main") -%>
+ <section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">DataTable with default features</h3>
+                    </div>
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>title</th>
+                                    <th>quick actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(var i=0; i < items.length; i++) { %>
+                                    <tr>
+                                        <td><%= items[i]['id'] %></td>
+                                        <td><a class="main-anchor-link" href="/admin/items/edit/<%= items[i]['id'] %>"><%= items[i]['title'] %></a></td>
+                                        <td class="project-actions">
+                                            <a class="btn btn-info btn-sm" href="/admin/items/edit/<%= items[i]['id'] %>">
+                                                <i class="fas fa-pencil-alt"></i>
+                                            </a>
+                                            <a class="btn btn-danger btn-sm delete-button" href="javascript:void(0);" data-id="<%= items[i]['id'] %>">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

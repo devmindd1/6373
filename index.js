@@ -51,7 +51,7 @@ app.use('/admin', routerAdmin);
     try {
         io.on('connection', socket => new Socket(socket));
 
-        server.listen(9027, '192.168.77.126', () => console.log('server in ' + 9027))
+        server.listen(9025, () => console.log('server in ' + 9025))
     }catch (e) {
         console.log(e);
     }

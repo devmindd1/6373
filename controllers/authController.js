@@ -5,7 +5,8 @@ const {generateTokens} = require('../services/tokenService');
 const UserDto = require('../dtos/UserDto');
 
 exports.connect = async function(req, res){
-    res.json(res.response);
+    res.response.user = req.user;
+    return res.status(200).json(res.response);
 };
 
 exports.logout = async function(req, res){

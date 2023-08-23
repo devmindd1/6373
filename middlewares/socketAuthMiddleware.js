@@ -1,4 +1,5 @@
 const tokenService = require('../services/tokenService');
+const UserDto = require('../dtos/UserDto');
 
 module.exports = function (authorizationHeader){
     try {
@@ -13,8 +14,7 @@ module.exports = function (authorizationHeader){
         if(!userData)
             return null;
 
-        userData.accessToken = accessToken;
-        return userData;
+        return new UserDto(userData);
     }catch (e) {
         return null;
     }

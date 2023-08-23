@@ -1,8 +1,8 @@
 const {body} = require("express-validator");
 
 const messageInsertBody = [
-    body('text').notEmpty()
-        .withMessage('text is require'),
+    // body('text').optional({checkFalsy: true})
+    //     .withMessage('test validation')
 ];
 
 module.exports = {

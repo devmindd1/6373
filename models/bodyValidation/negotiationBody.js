@@ -3,11 +3,11 @@ const ScenarioModel = require("../../models/ScenarioModel");
 const NegotiationUserModel = require("../../models/NegotiationUserModel");
 
 const negotiationJoinBody = [
-    body('negotiationId')
+    body('negotiationUuid')
         .custom(async (value, {req}) => {
             const negotiationUserModel = new NegotiationUserModel();
 
-            return negotiationUserModel.checkUserBelongs(value, req.socket.user.id).then((negotiation) => {
+            return negotiationUserModel.checkUserBelongsNegotiation(req.socket.user.id, value).then((negotiation) => {
                 if(!negotiation) throw new Error('negotiation dont found');
             });
         }),

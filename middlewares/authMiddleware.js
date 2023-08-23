@@ -1,4 +1,5 @@
 const {validateAccessToken} = require('../services/tokenService');
+const UserDto = require('../dtos/UserDto');
 
 module.exports = async function (req, res, next){
     try {
@@ -14,7 +15,7 @@ module.exports = async function (req, res, next){
         if(!user)
             return res.status(401).json();
 
-        req.user = user;
+        req.user = new UserDto(user);
 
         next();
     }catch (e) {

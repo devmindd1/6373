@@ -46,7 +46,7 @@ exports.signUp = async function(req, res){
     res.response.user = new UserDto(user);
     res.response.tokens = generateTokens({...res.response.user});
 
-    await userModel.updateRefreshToken(user.id, res.response.tokens.refreshToken);
+    await userModel.updateRefreshToken(user.id, res.response.tokens.accessToken);
 
     return res.json(res.response);
 };
@@ -76,7 +76,7 @@ exports.login = async function(req, res){
     res.response.user = new UserDto(user);
     res.response.tokens = await generateTokens({...res.response.user});
 
-    await userModel.updateRefreshToken(user.id, res.response.tokens.refreshToken);
+    await userModel.updateRefreshToken(user.id, res.response.tokens.accessToken);
 
     return res.status(200).json(res.response);
 };

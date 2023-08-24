@@ -25,8 +25,8 @@ class UserModel extends Model{
         return this.db('users').select('*').where({role: _TYPES['user']});
     }
 
-    getUserByRefreshToken(refreshToken){
-        const [user] =  this.t.select('*').where({refresh_token: refreshToken});
+    async getUserByRefreshToken(refreshToken){
+        const [user] =  await this.t.select('*').where({refresh_token: refreshToken});
 
         return user;
     }

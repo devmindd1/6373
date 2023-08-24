@@ -18,9 +18,7 @@ module.exports = async function (req, res, next){
         if(!user)
             return res.status(401).json();
 
-
-
-        const userData = await userModel.getUserByRefreshToken(_token);
+        const userData = await userModel.getUserByAccessToken(_token);
         if(!userData)
             return res.status(401).json();
 

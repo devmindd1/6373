@@ -8,7 +8,7 @@ module.exports = async function (req, res, next){
         if(!_token)
             return res.redirect('login');
 
-        const userData = await userModel.getUserByRefreshToken(_token);
+        const userData = await userModel.getUserByAccessToken(_token);
         if(!userData)
             return res.redirect('login');
 

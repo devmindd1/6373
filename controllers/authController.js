@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const {validationResult} = require('express-validator');
 const UserModel = require('../models/UserModel');
 const {generateTokens} = require('../services/tokenService');
+const {validateRefreshToken} = require('../services/tokenService');
 const UserDto = require('../dtos/UserDto');
 
 exports.connect = async function(req, res){
@@ -12,12 +13,22 @@ exports.connect = async function(req, res){
     return res.status(200).json(res.response);
 };
 
-exports.logout = async function(req, res){
-    // const userModel = new userModelClass();
+exports.refresh = async function(req, res){
+    const {refreshToken} = req.body;
+    if(!refreshToken)
+        res.status(401).json(req.response);
 
-    // await userModel.update(req.user.id, {
-    //     _token: null
-    // });
+    const userData = validateRefreshToken(refreshToken);
+    if(!userData)
+        res.status(401).json(res.response);
+
+    const userModel = new UserModel();
+
+    res.response.user = await userModel.getById(userData.id);
+    const user = new UserDto(res.response.user);
+
+    res.response.tokens = generateTokens({...user});
+    await userModel.updateAccessToken(user.id, res.response.tokens.accessToken);
 
     return res.status(200).json(res.response);
 };
@@ -46,7 +57,7 @@ exports.signUp = async function(req, res){
     res.response.user = new UserDto(user);
     res.response.tokens = generateTokens({...res.response.user});
 
-    await userModel.updateRefreshToken(user.id, res.response.tokens.accessToken);
+    await userModel.updateAccessToken(user.id, res.response.tokens.accessToken);
 
     return res.json(res.response);
 };
@@ -76,7 +87,7 @@ exports.login = async function(req, res){
     res.response.user = new UserDto(user);
     res.response.tokens = await generateTokens({...res.response.user});
 
-    await userModel.updateRefreshToken(user.id, res.response.tokens.accessToken);
+    await userModel.updateAccessToken(user.id, res.response.tokens.accessToken);
 
     return res.status(200).json(res.response);
 };

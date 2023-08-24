@@ -13,3 +13,7 @@ exports.generateTokens = function(payload){
 exports.validateAccessToken = function(_token){
     return jwt.verify(_token, process.env.JWT_ACCESS_SECRET);
 };
+
+exports.validateRefreshToken = function(_token){
+    return jwt.verify(_token, process.env.JWT_REFRESH_SECRET);
+};

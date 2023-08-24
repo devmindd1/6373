@@ -15,18 +15,12 @@ class UserModel extends Model{
         });
     }
 
-    updateUserToken(userId, token){
-        return this.t.update({
-            'refresh_token': token
-        }).where({id: userId});
-    }
-
     getAll(){
         return this.db('users').select('*').where({role: _TYPES['user']});
     }
 
-    async getUserByRefreshToken(refreshToken){
-        const [user] =  await this.t.select('*').where({refresh_token: refreshToken});
+    async getUserByAccessToken(accessToken){
+        const [user] =  await this.t.select('*').where({access_token: accessToken});
 
         return user;
     }
@@ -37,9 +31,9 @@ class UserModel extends Model{
         return users.length;
     }
 
-    updateRefreshToken(id, refreshToken){
+    updateAccessToken(id, accessToken){
         return this.t.update({
-            'refresh_token': refreshToken
+            'access_token': accessToken
         }).where({id: id});
     }
 

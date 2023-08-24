@@ -25,7 +25,7 @@ exports.login = async function(req, res){
         return res.render("admin/auth/login", {errorMessage: errorMessage});
 
     const token = randomString(32);
-    await userModel.updateUserToken(user.id, token);
+    await userModel.updateAccessToken(user.id, token);
 
     res.cookie('adminUToken', token , {maxAge: tokenMaxAge});
     res.redirect("/admin");

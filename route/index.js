@@ -1,6 +1,6 @@
 const router = new (require('express').Router)();
 const authMiddleware = require('../middlewares/authMiddleware');
-const {signUpBody, loginBody} = require('../models/bodyValidation/userBody');
+const {signUpBody, loginBody, resetPasswordBody, updateBody} = require('../models/bodyValidation/userBody');
 const {negotiationInsertBody} = require('../models/bodyValidation/negotiationBody');
 const {
     negotiationUserInsertBody,
@@ -9,6 +9,7 @@ const {
 } = require('../models/bodyValidation/negotiationUserBody');
 
 const auth = require('../controllers/authController');
+const user = require('../controllers/userController');
 const index = require('../controllers/indexController');
 const country = require('../controllers/countryController');
 const scenario = require('../controllers/scenarioController');
@@ -27,6 +28,9 @@ router.post('/negotiation-available', [], negotiation.getAvailable);
 //todo authmidlware to all('*'); without login sign in
 router.get('/connect', [authMiddleware], auth.connect);
 router.post('/logout', [authMiddleware], auth.logout);
+
+router.put('/users/reset-password', [authMiddleware, resetPasswordBody], user.resetPassword);
+router.put('/users/update-info', [authMiddleware, updateBody], user.update);
 
 router.get('/scenarios/list', [authMiddleware], scenario.getList);
 router.get('/scenarios/:scenarioId', [authMiddleware], scenario.getById);

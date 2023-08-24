@@ -26,7 +26,9 @@ class UserModel extends Model{
     }
 
     getUserByRefreshToken(refreshToken){
-        return this.t.select('*').where({refresh_token: refreshToken});
+        const [user] =  this.t.select('*').where({refresh_token: refreshToken});
+
+        return user;
     }
 
     async getUserByEmail(email){
@@ -58,7 +60,15 @@ class UserModel extends Model{
     }
 
     async getById(id){
-        const [user] = await this.t.select('*').where({id: id});
+        const [user] = await this.t.select('first_name', 'last_name', 'email', 'company', 'address', 'country_id')
+            .where({id: id});
+
+        return user;
+    }
+
+    async getAllById(id){
+        const [user] = await this.t.select('*')
+            .where({id: id});
 
         return user;
     }

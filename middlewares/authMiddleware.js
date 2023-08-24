@@ -1,7 +1,10 @@
 const {validateAccessToken} = require('../services/tokenService');
 const UserDto = require('../dtos/UserDto');
+const UserModel = require('../models/UserModel.js');
 
 module.exports = async function (req, res, next){
+    const userModel = new UserModel();
+
     try {
         const authorizationHeader = req.headers.authorization;
         if(!authorizationHeader)
@@ -14,6 +17,10 @@ module.exports = async function (req, res, next){
         const user = validateAccessToken(_token);
         if(!user)
             return res.status(401).json();
+
+        // const userData = await userModel.getUserByRefreshToken(_token);
+        // if(!userData)
+        //     return res.status(401).json();
 
         req.user = new UserDto(user);
 

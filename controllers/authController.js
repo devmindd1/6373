@@ -5,7 +5,10 @@ const {generateTokens} = require('../services/tokenService');
 const UserDto = require('../dtos/UserDto');
 
 exports.connect = async function(req, res){
-    res.response.user = req.user;
+    const userModel = new UserModel();
+
+    res.response.user = await userModel.getById(req.user.id);
+
     return res.status(200).json(res.response);
 };
 

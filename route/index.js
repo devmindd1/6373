@@ -20,10 +20,11 @@ const negotiationUser = require('../controllers/negotiationUserController');
 ///////////////////////////////////////////////////////////////////////////////////////////
 router.post('/login', [loginBody], auth.login);
 router.post('/sign-up', [signUpBody], auth.signUp);
+router.put('/auth-refresh', auth.refresh);
+
 router.post('/test', index.test);
 router.get('/test1', index.test);
 router.get('/countries', country.list);
-router.post('/negotiation-available', [], negotiation.getAvailable);
 
 //todo authmidlware to all('*'); without login sign in
 router.get('/connect', [authMiddleware], auth.connect);

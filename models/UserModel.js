@@ -32,9 +32,16 @@ class UserModel extends Model{
     }
 
     updateAccessToken(id, accessToken){
+        this.freeResult();
+
+
+
+        console.log(accessToken);
+
         return this.t.update({
             'access_token': accessToken
-        }).where({id: id});
+        })
+        .where({id: id});
     }
 
     async insert(data){

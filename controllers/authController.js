@@ -13,6 +13,14 @@ exports.connect = async function(req, res){
     return res.status(200).json(res.response);
 };
 
+exports.logout = async function(req, res){
+    // const userModel = new UserModel();
+    //
+    // res.response.user = await userModel.getById(req.user.id);
+
+    return res.status(200).json(res.response);
+};
+
 exports.refresh = async function(req, res){
     const {refreshToken} = req.body;
     if(!refreshToken)
@@ -28,7 +36,7 @@ exports.refresh = async function(req, res){
     const user = new UserDto(res.response.user);
 
     res.response.tokens = generateTokens({...user});
-    await userModel.updateAccessToken(user.id, res.response.tokens.accessToken);
+    await userModel.updateAccessToken(userData.id, res.response.tokens.accessToken);
 
     return res.status(200).json(res.response);
 };

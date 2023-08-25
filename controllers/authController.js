@@ -8,10 +8,6 @@ const UserDto = require('../dtos/UserDto');
 exports.connect = async function(req, res){
     const userModel = new UserModel();
 
-
-    console.log(req.user.id);
-    console.log(req.user);
-
     res.response.user = await userModel.getById(req.user.id);
 
     return res.status(200).json(res.response);
@@ -40,7 +36,7 @@ exports.refresh = async function(req, res){
     const user = new UserDto(res.response.user);
 
     res.response.tokens = generateTokens({...user});
-    await userModel.updateAccessToken(userData.id, res.response.tokens.accessToken);
+    await userModel.updateAccessToken(res.response.user.id, res.response.tokens.accessToken);
 
     return res.status(200).json(res.response);
 };

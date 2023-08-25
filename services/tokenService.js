@@ -11,9 +11,17 @@ exports.generateTokens = function(payload){
 };
 
 exports.validateAccessToken = function(_token){
-    return jwt.verify(_token, process.env.JWT_ACCESS_SECRET);
+    try {
+        return jwt.verify(_token, process.env.JWT_ACCESS_SECRET);
+    }catch (e) {
+        return null;
+    }
 };
 
 exports.validateRefreshToken = function(_token){
-    return jwt.verify(_token, process.env.JWT_REFRESH_SECRET);
+    try {
+        return jwt.verify(_token, process.env.JWT_REFRESH_SECRET);
+    }catch (e) {
+        return null;
+    }
 };

@@ -55,7 +55,7 @@ class UserModel extends Model{
     }
 
     async getByEmail(email){
-        const [user] = await this.t.select('*').where({email: email});
+        const [user] = await this.t.select('first_name', 'last_name', 'email', 'company', 'address', 'country_id').where({email: email});
 
         return user;
     }

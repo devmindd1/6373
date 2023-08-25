@@ -95,6 +95,8 @@ exports.login = async function(req, res){
     res.response.user = new UserDto(user);
     res.response.tokens = await generateTokens({...res.response.user});
 
+    res.response.user = user;
+
     await userModel.updateAccessToken(user.id, res.response.tokens.accessToken);
 
     return res.status(200).json(res.response);

@@ -29,12 +29,10 @@ exports.refresh = async function(req, res){
     if(!refreshToken)
         res.status(401).json(req.response);
 
-    const userData = await validateRefreshToken(refreshToken);
-
-    console.log(userData);
-
+    const userData = validateRefreshToken(refreshToken);
     if(!userData)
-        res.status(401).json(res.response);
+        return res.status(401).json(res.response);
+
 
     const userModel = new UserModel();
 

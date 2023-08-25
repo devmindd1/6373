@@ -36,10 +36,10 @@ exports.refresh = async function(req, res){
 
     const userModel = new UserModel();
 
-    res.response.user = await userModel.getById(userData.id);
+    res.response.user = await userModel.getAllById(userData.id);
     const user = new UserDto(res.response.user);
 
-    res.response.tokens = generateTokens({...user});
+    res.response.tokens = generateTokens(user);
     await userModel.updateAccessToken(userData.id, res.response.tokens.accessToken);
 
     return res.status(200).json(res.response);

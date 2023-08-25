@@ -3,11 +3,11 @@ const {body} = require("express-validator");
 const UserModel = require("../../models/UserModel");
 
 const updateBody = [
-    body('firstName').notEmpty()
+    body('first_name').notEmpty()
         .withMessage('First name is require'),
     body('country_id').isInt().optional({checkFalsy: true})
         .withMessage('country_id is integer'),
-    body('lastName').notEmpty()
+    body('last_name').notEmpty()
         .withMessage('Last name is require'),
 ];
 

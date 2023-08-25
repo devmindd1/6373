@@ -22,7 +22,7 @@ exports.resetPassword = async function(req, res){
 };
 
 exports.update = async function(req, res){
-    const {firstName, lastName, company, address, country_id} = req.body;
+    const {first_name, last_name, company, address, country_id} = req.body;
 
     const userModel = new UserModel();
 
@@ -33,8 +33,8 @@ exports.update = async function(req, res){
     }
 
     await userModel.updateById(req.user.id, {
-        first_name: firstName,
-        last_name: lastName,
+        first_name: first_name,
+        last_name: last_name,
         company: company || '',
         address: address || '',
         country_id: country_id || 0

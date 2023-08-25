@@ -29,7 +29,7 @@ exports.refresh = async function(req, res){
     if(!refreshToken)
         res.status(401).json(req.response);
 
-    const userData = validateRefreshToken(refreshToken);
+    const userData = await validateRefreshToken(refreshToken);
 
     console.log(userData);
 

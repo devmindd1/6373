@@ -15,15 +15,12 @@ module.exports = async function (req, res, next){
             return res.status(401).json();
 
         const user = validateAccessToken(_token);
-        if(!user)
+        if(!user || !user.id)
             return res.status(401).json();
 
         const userData = await userModel.getUserByAccessToken(_token);
         if(!userData)
             return res.status(401).json();
-
-
-        console.log(userData);
 
         req.user = new UserDto(user);
 

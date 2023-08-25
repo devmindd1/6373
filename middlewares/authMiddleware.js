@@ -22,6 +22,9 @@ module.exports = async function (req, res, next){
         if(!userData)
             return res.status(401).json();
 
+
+        console.log(userData);
+
         req.user = new UserDto(user);
 
         next();

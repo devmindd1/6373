@@ -7,7 +7,7 @@ const negotiationJoinBody = [
         .custom(async (value, {req}) => {
             const negotiationUserModel = new NegotiationUserModel();
 
-            return negotiationUserModel.checkUserBelongsNegotiation(req.socket.user.id, value).then((negotiation) => {
+            return negotiationUserModel.checkUserBelongsNegotiation(req.user.id, value).then((negotiation) => {
                 if(!negotiation) throw new Error('negotiation dont found');
             });
         }),

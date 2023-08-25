@@ -8,6 +8,9 @@ const UserDto = require('../dtos/UserDto');
 exports.connect = async function(req, res){
     const userModel = new UserModel();
 
+
+    console.log(req.user.id);
+
     res.response.user = await userModel.getById(req.user.id);
 
     return res.status(200).json(res.response);
